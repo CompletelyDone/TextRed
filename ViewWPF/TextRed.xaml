@@ -1,0 +1,45 @@
+﻿<Window x:Class="ViewWPF.TextRed"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ViewWPF"
+        mc:Ignorable="d"
+        Title="TextRed" Height="450" Width="600" MinWidth="600" MinHeight="450">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" MinWidth="400"/>
+            <ColumnDefinition Width="200"/>
+        </Grid.ColumnDefinitions>
+
+        <ListView 
+            Grid.Column="0" ItemsSource="{Binding ProcessProps}"  
+            Margin="30, 80, 30, 30" SelectedIndex="{Binding SelectedIndex, UpdateSourceTrigger=PropertyChanged}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding PathIn}">Путь от</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding PathOut}">Путь до</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding MinWordLength}">Мин кол-во символов</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding RemovePunctuation}">Убрать пунктуацию</GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <StackPanel Grid.Column="1" Margin="0,30,30,0" >
+            <Label Content="Введите путь до файла"/>
+            <Button Content="Выбрать" Command="{Binding OpenButton}"/>
+            <TextBox Text="{Binding PathIn}"/>
+            <Label Content="Введите путь куда сохранить"/>
+            <Button Content="Выбрать" Command="{Binding SaveButton}"/>
+            <TextBox Text="{Binding PathOut}"/>
+            <Label Content="Введите мин кол-во символов"/>
+            <TextBox Text="{Binding MinWordLength}"/>
+            <CheckBox IsChecked="{Binding RemovePunctuation}" Content="Удалить знаки препинания"/>
+
+            <Button Content="Добавить" Command="{Binding AddButton}"/>
+            <Button Content="Убрать" Command="{Binding RemoveButton}"/>
+            <Button Content="Обработать файлы" Margin="0, 30, 0, 0" Command="{Binding ProcessButton}"/>
+        </StackPanel>
+    </Grid>
+</Window>
